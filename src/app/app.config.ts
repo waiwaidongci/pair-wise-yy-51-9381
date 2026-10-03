@@ -7,6 +7,7 @@ import { provideStore } from '@ngrx/store'
 import { routes } from './app.routes'
 import { RouteEffects } from './store/route.effects'
 import { routeReducer } from './store/route.reducer'
+import { persistenceMetaReducer } from './store/meta-reducers'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
-    provideStore({ routes: routeReducer }),
+    provideStore({ routes: routeReducer }, { metaReducers: [persistenceMetaReducer] }),
     provideEffects(RouteEffects),
   ],
 }
